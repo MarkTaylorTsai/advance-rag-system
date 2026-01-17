@@ -3,9 +3,18 @@ rag_system
 
 Overview
 --------
-`rag_system` is a standalone Retrieval-Augmented Generation subsystem extracted from Open WebUI.
-It is designed to be portable and embeddable in other FastAPI apps without importing `open_webui`
-modules inside this directory.
+`rag_system` is a standalone Retrieval-Augmented Generation (RAG) backend you can embed into
+any FastAPI app. It focuses on document ingestion, knowledge base management, embedding and
+reranking, and fast retrieval across multiple vector stores and web sources.
+
+What it enables
+---------------
+- Build searchable knowledge bases with access control and sharing rules.
+- Ingest documents from files, URLs, web search, and external loaders.
+- Configure and switch embedding / reranking providers (OpenAI, Ollama, Azure, external).
+- Run hybrid search (semantic + BM25), metadata filters, and collection-level queries.
+- Process batches of files and manage vector collections at scale.
+- Expose clean API routes for retrieval, processing, and knowledge base operations.
 
 Initialization
 --------------
