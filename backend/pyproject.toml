@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "rag-system"
+version = "0.1.0"
+description = "Decoupled RAG engine for Open WebUI"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "pydantic",
+    "sqlalchemy",
+    "chromadb",
+    "langchain",
+    "beautifulsoup4",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
