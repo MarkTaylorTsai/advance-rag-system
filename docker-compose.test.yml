@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  tests:
+    image: python:3.11-slim
+    working_dir: /app
+    network_mode: host
+    volumes:
+      - ./:/app
+      - rag_test_uploads:/tmp/rag_test_uploads
+    environment:
+      - PYTHONPATH=/app
+      - RAG_EMBEDDING_ENGINE=ollama
+      - RAG_EMBEDDING_MODEL=nomic-embed-text
+      - RAG_OLLAMA_BASE_URL=http://localhost:11434
+      - VECTOR_DB=chroma
+      - CHROMA_DATA_PATH=/tmp/rag_chroma
+      - DATA_DIR=/tmp/rag_data
+      - DATABASE_URL=sqlite:////tmp/rag_test.db
+      - RAG_TEST_UPLOAD_DIR=/tmp/rag_test_uploads
+    command: >
+      bash -c "
+      pip install -e ./backend pytest aiohttp &&
+      python tests/wait_for_ollama.py &&
+      pytest -v tests/integration/test_rag_full_system.py
+      "
+
+volumes:
+  rag_test_uploads:

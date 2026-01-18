@@ -13,7 +13,14 @@ dependencies = [
     "sqlalchemy",
     "chromadb",
     "langchain",
+    "langchain-classic",
+    "langchain-community",
     "beautifulsoup4",
+    "validators",
+    "tiktoken",
+    "ftfy",
+    "azure-identity",
+    "ddgs",
 ]
 
 [tool.hatch.build.targets.wheel]

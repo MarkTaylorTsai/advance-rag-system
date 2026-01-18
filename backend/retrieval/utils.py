@@ -1,6 +1,6 @@
 import logging
 import os
-from typing import Awaitable, Optional, Union
+from typing import Awaitable, Optional, Union, Any
 
 import requests
 import aiohttp
@@ -132,7 +132,7 @@ class VectorSearchRetriever(BaseRetriever):
 
 
 def query_doc(
-    collection_name: str, query_embedding: list[float], k: int, user: UserModel = None
+    collection_name: str, query_embedding: list[float], k: int, user: Optional[Any] = None
 ):
     try:
         log.debug(f"query_doc:doc {collection_name}")
@@ -151,7 +151,7 @@ def query_doc(
         raise e
 
 
-def get_doc(collection_name: str, user: UserModel = None):
+def get_doc(collection_name: str, user: Optional[Any] = None):
     try:
         log.debug(f"get_doc:doc {collection_name}")
         result = VECTOR_DB_CLIENT.get(collection_name=collection_name)
@@ -537,7 +537,7 @@ def generate_openai_batch_embeddings(
     url: str = "https://api.openai.com/v1",
     key: str = "",
     prefix: str = None,
-    user: UserModel = None,
+    user: Optional[Any] = None,
 ) -> Optional[list[list[float]]]:
     try:
         log.debug(
@@ -576,7 +576,7 @@ async def agenerate_openai_batch_embeddings(
     url: str = "https://api.openai.com/v1",
     key: str = "",
     prefix: str = None,
-    user: UserModel = None,
+    user: Optional[Any] = None,
 ) -> Optional[list[list[float]]]:
     try:
         log.debug(
@@ -617,7 +617,7 @@ def generate_azure_openai_batch_embeddings(
     key: str = "",
     version: str = "",
     prefix: str = None,
-    user: UserModel = None,
+    user: Optional[Any] = None,
 ) -> Optional[list[list[float]]]:
     try:
         log.debug(
@@ -665,7 +665,7 @@ async def agenerate_azure_openai_batch_embeddings(
     key: str = "",
     version: str = "",
     prefix: str = None,
-    user: UserModel = None,
+    user: Optional[Any] = None,
 ) -> Optional[list[list[float]]]:
     try:
         log.debug(
@@ -705,7 +705,7 @@ def generate_ollama_batch_embeddings(
     url: str,
     key: str = "",
     prefix: str = None,
-    user: UserModel = None,
+    user: Optional[Any] = None,
 ) -> Optional[list[list[float]]]:
     try:
         log.debug(
@@ -745,7 +745,7 @@ async def agenerate_ollama_batch_embeddings(
     url: str,
     key: str = "",
     prefix: str = None,
-    user: UserModel = None,
+    user: Optional[Any] = None,
 ) -> Optional[list[list[float]]]:
     try:
         log.debug(
@@ -939,7 +939,7 @@ async def get_sources_from_items(
     hybrid_bm25_weight,
     hybrid_search,
     full_context=False,
-    user: Optional[UserModel] = None,
+    user: Optional[Any] = None,
 ):
     log.debug(
         f"items: {items} {queries} {embedding_function} {reranking_function} {full_context}"
